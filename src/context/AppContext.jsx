@@ -28,6 +28,8 @@ export const AppProvider = ({ children }) => {
   const [groupClassBookings, setGroupClassBookings] = useState([]);
   const [staff, setStaff] = useState([]);
   const [scheduleRequests, setScheduleRequests] = useState([]);
+  const [biometrics, setBiometrics] = useState([]);
+
 
   // Initialize DB and load states
   useEffect(() => {
@@ -53,6 +55,7 @@ export const AppProvider = ({ children }) => {
       setGroupClassBookings(data.groupClassBookings || []);
       setStaff(data.staff || []);
       setScheduleRequests(data.scheduleRequests || []);
+      setBiometrics(data.biometrics || []);
     } else {
       try {
         const response = await fetch('http://localhost:5000/api/db-state');
@@ -71,6 +74,7 @@ export const AppProvider = ({ children }) => {
         setGroupClassBookings(data.groupClassBookings || []);
         setStaff(data.staff || []);
         setScheduleRequests(data.scheduleRequests || []);
+        setBiometrics(data.biometrics || []);
       } catch (err) {
         console.error('Failed to load state from PostgreSQL backend. Falling back to Mock DB.', err);
         setUseMockDb(true);
@@ -695,6 +699,7 @@ export const AppProvider = ({ children }) => {
       groupClassBookings,
       staff,
       scheduleRequests,
+      biometrics,
       loginAs,
       logout,
       setCurrentUser,
